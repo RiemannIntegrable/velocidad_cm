@@ -1,15 +1,7 @@
 import numpy as np
 
 def metodo_autovector(P):
-    """
-    Calcula la distribución estacionaria usando el autovector del autovalor 1.
 
-    Args:
-        P: Matriz de transición (n×n)
-
-    Returns:
-        pi: Distribución estacionaria
-    """
     # Calcular autovalores y autovectores de P^T
     eigenvalues, eigenvectors = np.linalg.eig(P.T)
 
@@ -25,16 +17,7 @@ def metodo_autovector(P):
 
 
 def metodo_tiempos_retorno(P):
-    """
-    Calcula la distribución estacionaria usando tiempos medios de retorno.
-    Implementación según la formulación matricial del documento teórico.
 
-    Args:
-        P: Matriz de transición (n×n)
-
-    Returns:
-        pi: Distribución estacionaria
-    """
     n = P.shape[0]
     tiempos_retorno = np.zeros(n)
 
@@ -66,24 +49,3 @@ def metodo_tiempos_retorno(P):
     # Calcular distribución estacionaria: π_j = 1/μ_jj
     pi = 1.0 / tiempos_retorno
     return pi / pi.sum()  # Normalizar
-
-
-def generar_caminata_aleatoria(n, p):
-    """
-    Genera matriz de transición para caminata aleatoria cíclica.
-
-    Args:
-        n: Número de estados
-        p: Probabilidad de ir al siguiente estado (q = 1-p al anterior)
-
-    Returns:
-        P: Matriz de transición
-    """
-    q = 1 - p
-    P = np.zeros((n, n))
-
-    for i in range(n):
-        P[i, (i + 1) % n] = p  # Probabilidad de ir al siguiente (mod n para ciclo)
-        P[i, (i - 1) % n] = q  # Probabilidad de ir al anterior (mod n para ciclo)
-
-    return P

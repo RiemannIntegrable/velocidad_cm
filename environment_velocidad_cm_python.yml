@@ -1,0 +1,13 @@
+name: velocidad_cm_python
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python base
+  - python=3.11
+  
+  # Jupyter ecosystem (básico)
+  - jupyter>=1.0.0
+  - ipykernel>=6.20.0
+  - jupyterlab>=4.0.0

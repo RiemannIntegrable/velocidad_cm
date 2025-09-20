@@ -1,5 +1,6 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {section}{\numberline {1}Definición de los Métodos}{1}{section.1}%
 \contentsline {section}{\numberline {2}Función de las 3 Cadenas}{1}{section.2}%
-\contentsline {section}{\numberline {3}Bloques de Código que Generan los Cambios en las Cadenas}{1}{section.3}%
-\contentsline {section}{\numberline {4}Resultados de la Comparación con las Gráficas}{1}{section.4}%
+\contentsline {subsection}{\numberline {2.1}Caminata Aleatoria Simple}{1}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Bloques de Código que Generan los Cambios en las Cadenas}{2}{section.3}%
+\contentsline {section}{\numberline {4}Resultados de la Comparación con las Gráficas}{2}{section.4}%

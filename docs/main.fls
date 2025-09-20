@@ -1707,6 +1707,10 @@ INPUT ./content/Marco_teorico.tex
 INPUT content/Marco_teorico.tex
 INPUT ./content/Marco_teorico.tex
 INPUT content/Marco_teorico.tex
+INPUT ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png
+INPUT ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png
+INPUT ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png
+OUTPUT main.xdv
 INPUT ./content/Implementacion.tex
 INPUT content/Implementacion.tex
 INPUT ./content/Implementacion.tex
@@ -1727,10 +1731,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
-INPUT ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png
-INPUT ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png
-INPUT ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png
-OUTPUT main.xdv
 INPUT ./content/Resultados.tex
 INPUT content/Resultados.tex
 INPUT ./content/Resultados.tex

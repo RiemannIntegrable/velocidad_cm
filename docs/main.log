@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.7.4)  20 SEP 2025 03:39
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.7.4)  20 SEP 2025 03:56
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1634,15 +1634,9 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@toc=\write8
 \openout8 = `main.toc'.
 
- (./content/Marco_teorico.tex) (./content/Implementacion.tex
+ (./content/Marco_teorico.tex
 LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/n' will be
-(Font)              scaled to size 9.09317pt on input line 7.
-LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/n' will be
-(Font)              scaled to size 8.18385pt on input line 9.
-LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/b/n' will be
-(Font)              scaled to size 7.8691pt on input line 10.
-LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/it' will be
-(Font)              scaled to size 8.18385pt on input line 25.
+(Font)              scaled to size 9.09317pt on input line 31.
 File: ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png Graphic file (type bmp)
 <../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png>
 
@@ -1655,26 +1649,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [1
 
-]) (./content/Resultados.tex) 
+] [2] [3] [4]) (./content/Implementacion.tex [5]
+LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/n' will be
+(Font)              scaled to size 8.18385pt on input line 9.
+LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/b/n' will be
+(Font)              scaled to size 7.8691pt on input line 10.
+LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/it' will be
+(Font)              scaled to size 8.18385pt on input line 25.
+) (./content/Resultados.tex) 
 AED: lastpage setting LastPage
-[2] (./main.aux
+[6] (./main.aux
 LaTeX Info: Redefining \sptext on input line 26.
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
 )
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: EFD6394BDEAD3E4F335086C488985154;1194.
+(rerunfilecheck)             Checksum: F098D311F1F31114610106271D78935E;2104.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60271 strings out of 478190
- 1442354 string characters out of 5854814
- 2613883 words of memory out of 5000000
- 79919 multiletter control sequences out of 15000+600000
- 481892 words of font info for 97 fonts, out of 8000000 for 9000
+ 60292 strings out of 478190
+ 1442844 string characters out of 5854814
+ 2551883 words of memory out of 5000000
+ 79931 multiletter control sequences out of 15000+600000
+ 481948 words of font info for 104 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,20n,125p,1680b,4182s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 89i,21n,125p,1680b,4188s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (2 pages, 45240 bytes).
+Output written on main.xdv (6 pages, 131000 bytes).

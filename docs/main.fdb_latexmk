@@ -1,18 +1,18 @@
 # Fdb version 3
-["biber main"] 1758357509 "main.bcf" "main.bbl" "main" 1758357579
-  "main.bcf" 1758357578 105984 6dfa45d581beb4ce022faa8e9ee4b843 "xelatex"
+["biber main"] 1758357509 "main.bcf" "main.bbl" "main" 1758358585
+  "main.bcf" 1758358584 105984 6dfa45d581beb4ce022faa8e9ee4b843 "xelatex"
   (generated)
   "main.bbl"
   "main.blg"
-["xdvipdfmx"] 1758357579 "main.xdv" "main.pdf" "main" 1758357580
-  "main.xdv" 1758357578 45240 bcf9409989be15d1391e4b4e6f587dfb "xelatex"
+["xdvipdfmx"] 1758358584 "main.xdv" "main.pdf" "main" 1758358585
+  "main.xdv" 1758358584 131000 f436430638117d381df3ce959c516b25 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1758357573 "/home/andrespl/universidad/MAF_3/Cadenas_de_Markov/docs/main.tex" "main.xdv" "main" 1758357579
+["xelatex"] 1758358582 "/home/andrespl/universidad/MAF_3/Cadenas_de_Markov/docs/main.tex" "main.xdv" "main" 1758358585
   "../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png" 1758350661 230135 fd741ca5dd0413d672587d9f5c48db20 ""
   "/etc/texmf/web2c/texmf.cnf" 1751671005 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/andrespl/.texlive2021/texmf-var/web2c/xetex/xelatex.fmt" 1751674647 3606615 a4f25740f9a0aeadcc69d4903ea4abed ""
-  "/home/andrespl/universidad/MAF_3/Cadenas_de_Markov/docs/main.tex" 1758357495 528 34a77ace75655520ce234aa31650100f ""
+  "/home/andrespl/universidad/MAF_3/Cadenas_de_Markov/docs/main.tex" 1758357819 562 6f308b5d1f3df016588239335eaaa51e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -332,14 +332,14 @@
   "config/doc_style.tex" 1758350660 2387 8dfc001d764fef30b951a563d8f1fa45 ""
   "config/packages.tex" 1758350660 1168 a8c43789a632f57fe6354b3abeff03f4 ""
   "content/Implementacion.tex" 1758357573 1892 9e8e13378525db8099617f6a11121e02 ""
-  "content/Marco_teorico.tex" 1758357494 173 16b759dd49df638fa0f20ba979781526 ""
+  "content/Marco_teorico.tex" 1758357819 10964 30d76ed68246412dad7d3b727f14f687 ""
   "content/Resultados.tex" 1758350660 156 7498ed87ddfe51051a5ab99af3832df8 ""
-  "main.aux" 1758357578 1695 408677f3ec877143b7dc1f995fff6ee5 "xelatex"
-  "main.bbl" 1758357510 466 ee04f40f768daeed26442158e95aba61 "biber main"
-  "main.out" 1758357578 1194 efd6394bdead3e4f335086c488985154 "xelatex"
-  "main.run.xml" 1758357578 2438 474b458ee8f9df91178ef881f263e94e "xelatex"
-  "main.tex" 1758357495 528 34a77ace75655520ce234aa31650100f ""
-  "main.toc" 1758357578 501 92f1e203047436d2a915bc31b3224829 "xelatex"
+  "main.aux" 1758358584 4187 367e253171320b1fe4ab683255798db4 "xelatex"
+  "main.bbl" 1758357826 466 ee04f40f768daeed26442158e95aba61 "biber main"
+  "main.out" 1758358584 2104 f098d311f1f31114610106271d78935e "xelatex"
+  "main.run.xml" 1758358584 2438 474b458ee8f9df91178ef881f263e94e "xelatex"
+  "main.tex" 1758357819 562 6f308b5d1f3df016588239335eaaa51e ""
+  "main.toc" 1758358584 2296 d6d19d359af8c5e8817b9cddd17f8cd6 "xelatex"
   (generated)
   "main.aux"
   "main.auxlock"

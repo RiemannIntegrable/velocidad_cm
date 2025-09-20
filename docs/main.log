@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.4.10)  20 SEP 2025 01:39
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.6.14)  20 SEP 2025 03:19
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/riemannintegrable/ekg/velocidad_cm/docs/main.tex
-(/home/riemannintegrable/ekg/velocidad_cm/docs/main.tex
+**/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex
+(/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -1633,7 +1633,9 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@toc=\write8
 \openout8 = `main.toc'.
 
- (./content/Marco_teorico.tex) (./content/Implementacion.tex) (./content/Resultados.tex)
+ (./content/Marco_teorico.tex
+LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/n' will be
+(Font)              scaled to size 9.09317pt on input line 31.
 File: ../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png Graphic file (type bmp)
 <../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png>
 
@@ -1646,7 +1648,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [1
 
-] 
+] [2] [3] [4]) (./content/Implementacion.tex [5]) (./content/Resultados.tex) [6] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./main.aux
 LaTeX Info: Redefining \sptext on input line 12.
@@ -1658,18 +1660,18 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 53044CE53939A536B0CE07A947DB183A;1006.
+(rerunfilecheck)             Checksum: 9AFDA5030E68E39E7D95D3A25190D6E5;1916.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60379 strings out of 474878
- 1442349 string characters out of 5762516
- 2545657 words of memory out of 5000000
- 81501 multiletter control sequences out of 15000+600000
- 566421 words of font info for 82 fonts, out of 8000000 for 9000
+ 60408 strings out of 474878
+ 1443136 string characters out of 5762516
+ 2556660 words of memory out of 5000000
+ 81521 multiletter control sequences out of 15000+600000
+ 566469 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,20n,125p,1670b,4193s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,21n,125p,1674b,4199s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (1 page, 11628 bytes).
+Output written on main.xdv (6 pages, 99304 bytes).

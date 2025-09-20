@@ -1,20 +1,20 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1758350390.57698 0
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1758356356.58048 0
   "main.bcf" 0 -1 0 "xelatex"
   "referencias.bib" 0 -1 0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["xdvipdfmx"] 1758350390.08744 "main.xdv" "main.pdf" "main" 1758350390.58058 0
-  "main.xdv" 1758350389.88054 11628 3404d20754a173b815a3e2fb5579861d "xelatex"
+["xdvipdfmx"] 1758356355.90434 "main.xdv" "main.pdf" "main" 1758356356.58983 0
+  "main.xdv" 1758356355.60533 99304 5e193ba4b22a8d384bacdd489aa6f191 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1758350388.10451 "/home/riemannintegrable/ekg/velocidad_cm/docs/main.tex" "main.xdv" "main" 1758350390.57713 0
-  "../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png" 1758350113.24061 230135 fd741ca5dd0413d672587d9f5c48db20 ""
-  "/etc/texmf/web2c/texmf.cnf" 1733764869.55781 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/riemannintegrable/ekg/velocidad_cm/docs/main.tex" 1758350356.61055 528 34a77ace75655520ce234aa31650100f ""
+["xelatex"] 1758356352.86523 "/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex" "main.xdv" "main" 1758356356.5807 0
+  "../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png" 1758350174.5327 230135 fd741ca5dd0413d672587d9f5c48db20 ""
+  "/etc/texmf/web2c/texmf.cnf" 1749926359.45952 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex" 1758355110.23721 562 6f308b5d1f3df016588239335eaaa51e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -323,19 +323,19 @@
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmr10.tfm" 1254269338 12056 7e13df7fe4cbce21b072ba7c4f4deb6e ""
   "/usr/share/texmf/tex/latex/lm/t1lmr.fd" 1616454256 1867 996fe743d88a01aca041ed22cc10e1bb ""
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
-  "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1744316129 10840817 6d076b7faa962c9c52b3e7c640b99e7f ""
-  "config/commands.tex" 1758350113.24061 6752 9b439b0af41e219cbd39dab1b5e7d505 ""
-  "config/doc_style.tex" 1758350387.90054 2387 8dfc001d764fef30b951a563d8f1fa45 ""
-  "config/packages.tex" 1758350113.24061 1168 a8c43789a632f57fe6354b3abeff03f4 ""
-  "content/Implementacion.tex" 1758350113.24061 276 4ba6829cf2fbf6754a64c87aa9f3d51a ""
-  "content/Marco_teorico.tex" 1758350113.24061 173 16b759dd49df638fa0f20ba979781526 ""
-  "content/Resultados.tex" 1758350113.24061 156 7498ed87ddfe51051a5ab99af3832df8 ""
-  "main.aux" 1758350389.87054 1064 57f2a9855bc834ef95846765abecb436 "xelatex"
+  "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1749928595 10847394 be66f4b6760063f6b706d853de2455ee ""
+  "config/commands.tex" 1758350174.5327 6752 9b439b0af41e219cbd39dab1b5e7d505 ""
+  "config/doc_style.tex" 1758350661.40478 2387 8dfc001d764fef30b951a563d8f1fa45 ""
+  "config/packages.tex" 1758350174.5327 1168 a8c43789a632f57fe6354b3abeff03f4 ""
+  "content/Implementacion.tex" 1758350174.5327 276 4ba6829cf2fbf6754a64c87aa9f3d51a ""
+  "content/Marco_teorico.tex" 1758356348.85733 10964 30d76ed68246412dad7d3b727f14f687 ""
+  "content/Resultados.tex" 1758350174.5327 156 7498ed87ddfe51051a5ab99af3832df8 ""
+  "main.aux" 1758356355.58933 3556 922ab74e574cef55f0928f76a21c178f "xelatex"
   "main.bbl" 0 -1 0 "biber main"
-  "main.out" 1758350389.87054 1006 53044ce53939a536b0ce07a947db183a "xelatex"
-  "main.run.xml" 1758350389.88054 2438 474b458ee8f9df91178ef881f263e94e "xelatex"
-  "main.tex" 1758350356.61055 528 34a77ace75655520ce234aa31650100f ""
-  "main.toc" 1758350389.88054 410 c65f2bc75da39541b7c1bdfecf98c2db "xelatex"
+  "main.out" 1758356355.59733 1916 9afda5030e68e39e7d95d3a25190d6e5 "xelatex"
+  "main.run.xml" 1758356355.60533 2438 474b458ee8f9df91178ef881f263e94e "xelatex"
+  "main.tex" 1758355110.23721 562 6f308b5d1f3df016588239335eaaa51e ""
+  "main.toc" 1758356355.60533 2205 54d9d7b15cb063cbba058bd8d58fdbbb "xelatex"
   (generated)
   "main.aux"
   "main.auxlock"

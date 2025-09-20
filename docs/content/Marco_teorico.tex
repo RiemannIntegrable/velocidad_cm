@@ -1,3 +1,319 @@
-\section{Definición de los Métodos}
+\section{Marco Teórico}
 
-% Contenido a desarrollar: los 2 métodos, con los bloques de las funciones en el notebook, y se menciona la función que los compara
+\subsection{Método del Autovector}
+
+\subsubsection{Fundamentación Teórica}
+
+La distribución estacionaria $\pi$ puede caracterizarse como el \textbf{autovector izquierdo} de la matriz $P$ asociado al autovalor $\lambda = 1$:
+
+\begin{equation}
+\pi P = \pi \Leftrightarrow \pi^T P^T = \pi^T
+\end{equation}
+
+Esto equivale a resolver el problema de autovalores:
+\begin{equation}
+P^T \mathbf{v} = \mathbf{v}
+\end{equation}
+
+donde $\mathbf{v} = \pi^T$ es el autovector derecho de $P^T$ correspondiente a $\lambda = 1$.
+
+\textbf{Teorema de Perron-Frobenius:} Para una matriz estocástica irreducible $P$:
+\begin{itemize}
+\item El autovalor $\lambda = 1$ es simple y dominante: $|\lambda_i| \leq 1$ para $i \geq 2$
+\item Existe un único autovector izquierdo positivo $\pi$ (normalizado) asociado a $\lambda = 1$
+\item Todos los demás autovalores satisfacen $|\lambda_i| < 1$ si $P$ es aperiódica
+\end{itemize}
+
+\subsubsection{Algoritmos de Implementación}
+
+\textbf{Descomposición Espectral Directa:}
+
+El algoritmo \texttt{np.linalg.eig(P.T)} calcula todos los autovalores y autovectores mediante:
+
+\begin{enumerate}
+\item \textbf{Reducción a forma de Hessenberg} usando transformaciones de Householder
+\item \textbf{Algoritmo QR con desplazamientos} para encontrar autovalores
+\item \textbf{Cálculo de autovectores} por sustitución hacia atrás
+\end{enumerate}
+
+\textbf{Método de la Potencia:}
+
+Para encontrar el autovector dominante, se itera:
+\begin{equation}
+\pi^{(k+1)} = \frac{\pi^{(k)} P}{\|\pi^{(k)} P\|_1}
+\end{equation}
+
+La convergencia está garantizada por:
+\begin{equation}
+\|\pi^{(k)} - \pi\|_1 \leq C \left|\frac{\lambda_2}{\lambda_1}\right|^k = C |\lambda_2|^k
+\end{equation}
+
+donde $\lambda_2$ es el segundo autovalor más grande en módulo.
+
+\subsubsection{Análisis de Complejidad Computacional}
+
+\textbf{Descomposición Espectral Completa:}
+
+La complejidad temporal es $\mathcal{O}(n^3)$ con las siguientes contribuciones:
+\begin{itemize}
+\item Reducción Hessenberg: $\approx \frac{10n^3}{3}$ operaciones de punto flotante
+\item Iteraciones QR: $\approx 6n^3$ operaciones (promedio)
+\item Cálculo de autovectores: $\approx 3n^3$ operaciones
+\end{itemize}
+
+\textbf{Total}: $\approx 10n^3$ operaciones de punto flotante.
+
+\textbf{Método de la Potencia:}
+
+Cada iteración requiere:
+\begin{itemize}
+\item Multiplicación vector-matriz: $\mathcal{O}(n^2)$ operaciones
+\item Normalización: $\mathcal{O}(n)$ operaciones
+\end{itemize}
+
+Para $k$ iteraciones: $\mathcal{O}(kn^2)$ donde:
+\begin{equation}
+k = \mathcal{O}\left(\frac{\log(\epsilon)}{\log(|\lambda_2|)}\right)
+\end{equation}
+
+En el peor caso (matrices mal condicionadas): $k = \mathcal{O}(n)$, resultando en $\mathcal{O}(n^3)$.
+En casos típicos: $k = \mathcal{O}(\log n)$, resultando en $\mathcal{O}(n^2 \log n)$.
+
+\textbf{Complejidad Espacial:}
+\begin{itemize}
+\item Descomposición espectral: $\mathcal{O}(n^2)$ (matriz completa + autovectores)
+\item Método de la potencia: $\mathcal{O}(n)$ (solo vectores)
+\end{itemize}
+
+\subsection{Método de Tiempos Medios de Primer Retorno}
+
+\subsubsection{Fundamentación Teórica}
+
+El \textbf{tiempo medio de primer retorno} al estado $j$ se define como:
+\begin{equation}
+E[T_j] = E[\min\{n \geq 1 : X_n = j | X_0 = j\}]
+\end{equation}
+
+\textbf{Teorema Fundamental:} Para una cadena de Markov irreducible con distribución estacionaria $\pi$:
+\begin{equation}
+\pi_j = \frac{1}{E[T_j]}
+\end{equation}
+
+Esta relación establece que la probabilidad estacionaria es inversamente proporcional al tiempo esperado de retorno.
+
+\textbf{Derivación del Sistema Lineal:}
+
+Sea $m_j^{(i)}$ el tiempo esperado de primer retorno al estado $j$ comenzando desde el estado $i \neq j$. Entonces:
+
+\begin{equation}
+m_j^{(i)} = 1 + \sum_{k \neq j} P_{ik} m_j^{(k)}
+\end{equation}
+
+Esto genera un sistema lineal de $(n-1) \times (n-1)$:
+\begin{equation}
+(I - P_{-j}) \mathbf{m}_j = \mathbf{1}
+\end{equation}
+
+donde $P_{-j}$ es la matriz $P$ con la fila y columna $j$ eliminadas, y $\mathbf{m}_j$ es el vector de tiempos de retorno desde todos los estados excepto $j$.
+
+El tiempo medio de retorno desde $j$ es:
+\begin{equation}
+E[T_j] = 1 + \sum_{k \neq j} P_{jk} m_j^{(k)}
+\end{equation}
+
+\subsubsection{Implementación Algorítmica}
+
+El algoritmo estándar procede como sigue:
+
+\begin{enumerate}
+\item \textbf{Para cada estado $j = 0, 1, \ldots, n-1$:}
+\item Construir matriz reducida $P_{-j} \in \mathbb{R}^{(n-1) \times (n-1)}$
+\item Resolver sistema lineal $(I - P_{-j}) \mathbf{m}_j = \mathbf{1}$
+\item Calcular $E[T_j] = 1 + \mathbf{p}_{j,-j}^T \mathbf{m}_j$
+\item Obtener $\pi_j = 1/E[T_j]$
+\end{enumerate}
+
+\subsubsection{Análisis Detallado de Complejidad}
+
+\textbf{Implementación No Optimizada:}
+
+\textbf{Paso 1 - Construcción de $P_{-j}$:}
+\begin{itemize}
+\item Eliminar fila $j$: copiar $n \times (n-1)$ elementos $\Rightarrow \mathcal{O}(n^2)$
+\item Eliminar columna $j$: copiar $(n-1) \times (n-1)$ elementos $\Rightarrow \mathcal{O}(n^2)$
+\end{itemize}
+
+\textbf{Paso 2 - Resolución del Sistema Lineal:}
+
+El sistema $(I - P_{-j}) \mathbf{m}_j = \mathbf{1}$ se resuelve mediante factorización LU:
+
+\textbf{Factorización LU:}
+\begin{equation}
+\text{Costo} = \sum_{k=0}^{n-2} (n-1-k)^2 \approx \frac{(n-1)^3}{3} = \mathcal{O}(n^3)
+\end{equation}
+
+\textbf{Sustitución hacia adelante} $(L\mathbf{y} = \mathbf{1})$:
+\begin{equation}
+\text{Costo} = \sum_{i=0}^{n-2} i = \frac{(n-1)(n-2)}{2} = \mathcal{O}(n^2)
+\end{equation}
+
+\textbf{Sustitución hacia atrás} $(U\mathbf{m}_j = \mathbf{y})$:
+\begin{equation}
+\text{Costo} = \mathcal{O}(n^2)
+\end{equation}
+
+\textbf{Costo total por sistema:} $\mathcal{O}(n^3)$
+
+\textbf{Paso 3 - Cálculo de $E[T_j]$:}
+Producto escalar: $\mathcal{O}(n)$
+
+\textbf{Complejidad Total:}
+Para $n$ estados: $n \times \mathcal{O}(n^3) = \mathcal{O}(n^4)$
+
+\textbf{Desglose de Operaciones de Punto Flotante:}
+\begin{itemize}
+\item Factorización LU por sistema: $\approx \frac{2(n-1)^3}{3}$ flops
+\item Sustituciones: $\approx 2(n-1)^2$ flops
+\item Total por estado: $\approx \frac{2n^3}{3}$ flops
+\item Total algoritmo: $\approx \frac{2n^4}{3}$ flops
+\end{itemize}
+
+\textbf{Propuesta de Optimización:}
+
+En lugar de resolver $n$ sistemas separados, se puede usar la \textbf{matriz fundamental}:
+
+\begin{equation}
+Z = (I - P + \mathbf{1}\pi^T)^{-1}
+\end{equation}
+
+Los tiempos de retorno se obtienen directamente:
+\begin{equation}
+E[T_j] = \frac{Z_{jj}}{\pi_j}
+\end{equation}
+
+Esta optimización reduce la complejidad a $\mathcal{O}(n^3)$ (una sola factorización).
+
+\subsection{Análisis Comparativo de Complejidad Computacional}
+
+\subsubsection{Complejidades Teóricas}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Método} & \textbf{Complejidad Temporal} & \textbf{Complejidad Espacial} & \textbf{Estabilidad} \\
+\hline
+Autovector (descomp. espectral) & $\mathcal{O}(n^3)$ & $\mathcal{O}(n^2)$ & Excelente \\
+Autovector (método potencia) & $\mathcal{O}(kn^2)$ & $\mathcal{O}(n)$ & Buena \\
+Tiempos (no optimizado) & $\mathcal{O}(n^4)$ & $\mathcal{O}(n^2)$ & Excelente \\
+Tiempos (optimizado) & $\mathcal{O}(n^3)$ & $\mathcal{O}(n^2)$ & Excelente \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Análisis de Constantes Multiplicativas}
+
+Para una matriz $n \times n$, las operaciones de punto flotante exactas son:
+
+\textbf{Método del Autovector (descomposición espectral):}
+\begin{itemize}
+\item Reducción Hessenberg: $\frac{10n^3}{3}$ flops
+\item Algoritmo QR: $6n^3$ flops (promedio)
+\item Cálculo autovectores: $3n^3$ flops
+\item \textbf{Total}: $\approx 10n^3$ flops
+\end{itemize}
+
+\textbf{Método de Tiempos (implementación estándar):}
+\begin{itemize}
+\item Factorización LU por estado: $\frac{2(n-1)^3}{3}$ flops
+\item Para $n$ estados: $n \times \frac{2(n-1)^3}{3} \approx \frac{2n^4}{3}$ flops
+\item \textbf{Total}: $\approx 0.67n^4$ flops
+\end{itemize}
+
+\subsubsection{Razón de Complejidades Empíricas}
+
+La razón de tiempos de ejecución para matrices de diferentes tamaños:
+
+\begin{equation}
+\frac{\text{Tiempo}(\text{Tiempos})}{\text{Tiempo}(\text{Autovector})} \approx \frac{0.67n^4}{10n^3} = 0.067n
+\end{equation}
+
+\textbf{Ejemplos numéricos:}
+\begin{itemize}
+\item $n = 100$: Razón $\approx 6.7 \times$
+\item $n = 500$: Razón $\approx 33.5 \times$
+\item $n = 1000$: Razón $\approx 67 \times$
+\end{itemize}
+
+\subsubsection{Efectos de Optimizaciones de Hardware}
+
+\textbf{Bibliotecas BLAS/LAPACK:}
+\begin{itemize}
+\item Optimizaciones de caché y vectorización
+\item Paralelización automática para operaciones matriciales
+\item Speedup típico: $10-100\times$ vs implementación ingenua
+\end{itemize}
+
+\textbf{Factores que Afectan Mediciones Empíricas:}
+\begin{enumerate}
+\item \textbf{Tamaños pequeños}: Términos de orden inferior dominan para $n < 100$
+\item \textbf{Jerarquía de memoria}: Matrices que caben en caché L2/L3 son significativamente más rápidas
+\item \textbf{Paralelización}: BLAS puede usar múltiples threads automáticamente
+\item \textbf{Overhead del intérprete}: Constante aditiva significativa para $n$ pequeño
+\end{enumerate}
+
+\subsubsection{Convergencia del Método de la Potencia}
+
+La velocidad de convergencia depende del \textbf{gap espectral}:
+
+\begin{equation}
+\text{Error}^{(k)} \leq C \left|\frac{\lambda_2}{\lambda_1}\right|^k = C |\lambda_2|^k
+\end{equation}
+
+\textbf{Casos típicos:}
+\begin{itemize}
+\item Matrices bien condicionadas: $|\lambda_2| \leq 0.9 \Rightarrow k = \mathcal{O}(\log n)$
+\item Matrices mal condicionadas: $|\lambda_2| \approx 1 \Rightarrow k = \mathcal{O}(n)$
+\end{itemize}
+
+\subsection{Recomendaciones Algorítmicas}
+
+\subsubsection{Criterios de Selección}
+
+\textbf{Para matrices pequeñas} ($n \leq 100$):
+\begin{itemize}
+\item Usar descomposición espectral directa
+\item Overhead de setup es despreciable
+\item Máxima precisión numérica
+\end{itemize}
+
+\textbf{Para matrices medianas} ($100 < n \leq 1000$):
+\begin{itemize}
+\item Descomposición espectral si se requiere precisión
+\item Método de la potencia si la memoria es limitada
+\item Evitar método de tiempos no optimizado
+\end{itemize}
+
+\textbf{Para matrices grandes} ($n > 1000$):
+\begin{itemize}
+\item Considerar métodos iterativos especializados
+\item Explotar estructura dispersa si es aplicable
+\item Método de la potencia con precondicionamiento
+\end{itemize}
+
+\subsubsection{Consideraciones de Estabilidad Numérica}
+
+\textbf{Condicionamiento de la matriz $P$:}
+El número de condición $\kappa(P) = \frac{\sigma_{\max}}{\sigma_{\min}}$ afecta la precisión:
+
+\begin{itemize}
+\item $\kappa(P) < 10^{12}$: Precisión de máquina alcanzable
+\item $\kappa(P) > 10^{12}$: Pérdida significativa de dígitos significativos
+\end{itemize}
+
+\textbf{Propagación de errores:}
+\begin{equation}
+\frac{\|\Delta \pi\|}{\|\pi\|} \leq \kappa(P) \frac{\|\Delta P\|}{\|P\|}
+\end{equation}
+
+El método del autovector es generalmente más robusto ante perturbaciones en $P$ que el método de tiempos medios.

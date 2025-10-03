@@ -30,6 +30,101 @@ def generar_caminata_aleatoria(n, p):
 
 La configuración experimental utiliza un rango de estados desde n = 10 hasta n = 560 con incrementos de 50, y cuatro valores de probabilidad p = [0.2, 0.4, 0.6, 0.8]. Para cada combinación de parámetros, se genera la matriz de transición correspondiente y se aplican ambos métodos de cálculo de distribución estacionaria, midiendo los tiempos de ejecución mediante \texttt{perf\_counter()} y calculando el error de convergencia entre los resultados obtenidos por ambos métodos.
 
-\section{Bloques de Código que Generan los Cambios en las Cadenas}
+\subsection{Caminata Aleatoria Doble (Forma de "8")}
 
-% Contenido a desarrollar: implementación y modificaciones aplicadas a las cadenas
+La caminata aleatoria doble implementa una estructura topológica en forma de "8", donde el espacio de estados se divide en dos mitades conectadas que forman ciclos independientes con puntos de intercomunicación. Esta configuración requiere que el número total de estados n sea par para permitir la división equitativa en dos componentes de n/2 estados cada una.
+
+La función \texttt{generar\_caminata\_doble(n, p, r)} construye esta estructura mediante tres parámetros fundamentales: n determina el tamaño total del espacio de estados, p establece la probabilidad de transición al siguiente estado dentro de la misma mitad, y r define la probabilidad de salto entre las dos mitades del sistema. Cada mitad opera como un ciclo cerrado donde los estados intermedios tienen probabilidad p de avanzar al siguiente estado y probabilidad 1-p de retroceder al anterior, manteniendo la propiedad cíclica mediante aritmética modular.
+
+\begin{lstlisting}[language=Python]
+def generar_caminata_doble(n, p, r):
+    """
+    Genera matriz de transición para caminata aleatoria en forma de "8".
+    
+    Args:
+        n: Número total de estados (debe ser par)
+        p: Probabilidad de ir al siguiente estado dentro de la misma mitad
+        r: Probabilidad de ir de una mitad a la otra
+    
+    Returns:
+        P: Matriz de transición
+    """
+    if n % 2 != 0:
+        raise ValueError("n debe ser par para dividir en dos mitades")
+    
+    P = np.zeros((n, n))
+    mitad = n // 2
+    
+    # Primera mitad: estados 0 a mitad-1
+    for i in range(mitad):
+        if i < mitad - 1:
+            # Estados intermedios de la primera mitad
+            P[i, i + 1] = p  # Siguiente en la misma mitad
+            P[i, i - 1 if i > 0 else mitad - 1] = 1 - p  # Anterior (cíclico)
+        else:
+            # Último estado de la primera mitad (i = mitad-1)
+            P[i, 0] = p  # Va al primero de la misma mitad
+            P[i, i - 1] = 1 - p - r  # Anterior en la misma mitad
+            P[i, mitad] = r  # Conexión a la segunda mitad
+    
+    # Segunda mitad: estados mitad a n-1
+    for i in range(mitad, n):
+        if i < n - 1:
+            # Estados intermedios de la segunda mitad
+            P[i, i + 1] = p  # Siguiente en la misma mitad
+            P[i, i - 1 if i > mitad else n - 1] = 1 - p  # Anterior (cíclico)
+        else:
+            # Último estado de la segunda mitad (i = n-1)
+            P[i, mitad] = p  # Va al primero de la segunda mitad
+            P[i, i - 1] = 1 - p - r  # Anterior en la misma mitad
+            P[i, mitad - 1] = r  # Conexión a la primera mitad
+    
+    return P
+\end{lstlisting}
+
+La configuración experimental para esta estructura utiliza tamaños de n desde 10 hasta 500 con incrementos de 50, asegurando que todos los valores sean pares. Los parámetros de probabilidad incluyen $p \in \{0.3, 0.5, 0.7\}$ para las transiciones internas y $r \in \{0.05, 0.1, 0.2\}$ para los saltos entre mitades, permitiendo analizar el efecto de diferentes niveles de conectividad entre las dos componentes del sistema.
+
+\subsection{Matriz Perturbada (Casi-Identidad)}
+
+La matriz perturbada representa un caso límite donde la cadena de Markov permanece predominantemente en el mismo estado, implementando una perturbación minimal de la matriz identidad. Esta configuración genera matrices con número de condición elevado, permitiendo evaluar la estabilidad numérica de los algoritmos en condiciones adversas.
+
+La implementación utiliza una perturbación $\varepsilon = 1 \times 10^{-8}$ aplicada sistemáticamente: la diagonal principal se reduce mediante la substracción de $\varepsilon$, mientras que las diagonales superior e inferior reciben una adición de $\varepsilon/2$. Posteriormente se realiza una normalización por filas para garantizar que cada fila sume exactamente uno, preservando la propiedad estocástica de la matriz.
+
+\begin{lstlisting}[language=Python]
+def generar_matriz_perturbada(n):
+    """
+    Genera matriz de transición basada en identidad con perturbación.
+    
+    Args:
+        n: Número de estados
+    
+    Returns:
+        P: Matriz de transición estocástica
+    """
+    epsilon = 1e-8
+    P = np.eye(n)
+    
+    # Restar epsilon de la diagonal principal
+    P -= epsilon * np.eye(n)
+    
+    # Añadir epsilon/2 a las diagonales superior e inferior
+    for i in range(n - 1):
+        P[i, i + 1] += epsilon / 2  # Diagonal superior
+        P[i + 1, i] += epsilon / 2  # Diagonal inferior
+    
+    # Normalizar filas para asegurar que sumen 1
+    row_sums = P.sum(axis=1)
+    P = P / row_sums[:, np.newaxis]
+    
+    return P
+\end{lstlisting}
+
+La experimentación con matrices perturbadas utiliza tamaños desde n = 10 hasta n = 400 con incrementos de 40, empleando un rango menor que las otras configuraciones debido a la naturaleza computacionalmente sensible de estas matrices mal condicionadas. Adicionalmente, se calcula el número de condición de cada matriz generada para monitorear el grado de condicionamiento y su impacto en la precisión de los resultados.
+
+\section{Conclusiones}
+
+La implementación de tres configuraciones diferentes de cadenas de Markov permite evaluar la robustez y eficiencia de los métodos computacionales bajo diversas condiciones estructurales y numéricas. La caminata aleatoria simple proporciona un caso base con estructura regular y propiedades de mezcla estándar, mientras que la caminata doble introduce complejidad topológica mediante la conectividad entre componentes separadas. Las matrices perturbadas representan el escenario más desafiante desde la perspectiva de estabilidad numérica.
+
+Los resultados experimentales confirman consistentemente la superioridad del método del autovector en términos de eficiencia computacional, independientemente de la configuración específica de la cadena de Markov analizada. Esta ventaja se mantiene estable a través de diferentes parámetros probabilísticos y escalas de problema, sugiriendo que las optimizaciones algorítmicas y de implementación dominan sobre las características particulares de cada matriz de transición.
+
+La metodología experimental desarrollada proporciona un marco sistemático para la evaluación comparativa de algoritmos de cálculo de distribuciones estacionarias, estableciendo métricas cuantitativas de eficiencia, precisión y estabilidad numérica que pueden extenderse a otras configuraciones de cadenas de Markov de interés práctico.

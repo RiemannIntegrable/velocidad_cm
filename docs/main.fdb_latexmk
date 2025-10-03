@@ -1,20 +1,27 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 0 0
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1759314520.14513 0
   "main.bcf" 0 -1 0 "xelatex"
   "referencias.bib" 0 -1 0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["xdvipdfmx"] 1758358306.36365 "main.xdv" "main.pdf" "main" 1758358307.21747 0
-  "main.xdv" 1758358306.06536 128712 fd9486a38b543a21ad7df7eb6fbfe574 "xelatex"
+["xdvipdfmx"] 1759314516.21104 "main.xdv" "main.pdf" "main" 1759314520.15201 0
+  "main.xdv" 1759314515.83798 321096 8ab871d032c0f5ee2fd1cbe954e7a4e3 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1758358303.40084 "/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex" "main.xdv" "main" 1758358307.21152 0
+["xelatex"] 1759314512.868 "/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex" "main.xdv" "main" 1759314520.14528 0
   "../images/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).png" 1758350174.5327 230135 fd741ca5dd0413d672587d9f5c48db20 ""
+  "../images/caminata_doble_p_0.3.png" 1759314157.7013 336297 b877fccc955471e3a284099205d10cb4 ""
+  "../images/caminata_doble_p_0.5.png" 1759314161.19475 327413 74d0b82918f74417ac0de7cefd87ec6a ""
+  "../images/caminata_doble_p_0.7.png" 1759314165.06357 331842 d66dac5494228fed40118065cc6b4fe0 ""
+  "../images/caminata_doble_ratios.png" 1759314167.34413 212165 2520528f87c1883f9ad6c1a7a1ff5a1f ""
+  "../images/caminata_simple_lineal.png" 1759314067.39158 169894 09b564ddcf9e0302d622ffdc3413417e ""
+  "../images/caminata_simple_loglog.png" 1759314071.262 239276 01019ea2f3de1664111bac113a0bffdb ""
+  "../images/matriz_perturbada_analisis.png" 1759314173.39278 222302 88834571a2c7011866f5997d5bdc7f04 ""
   "/etc/texmf/web2c/texmf.cnf" 1749926359.45952 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex" 1758357792.58541 562 6f308b5d1f3df016588239335eaaa51e ""
+  "/home/ge-murillo/universidad/CadenasdeMarkov/docs/main.tex" 1759314512.64684 562 6f308b5d1f3df016588239335eaaa51e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -334,15 +341,15 @@
   "config/commands.tex" 1758350174.5327 6752 9b439b0af41e219cbd39dab1b5e7d505 ""
   "config/doc_style.tex" 1758350661.40478 2387 8dfc001d764fef30b951a563d8f1fa45 ""
   "config/packages.tex" 1758350174.5327 1168 a8c43789a632f57fe6354b3abeff03f4 ""
-  "content/Implementacion.tex" 1758357792.57341 1892 9e8e13378525db8099617f6a11121e02 ""
-  "content/Marco_teorico.tex" 1758358298.27336 9221 22c9c2a15c29d31c8e395f8605ca14c1 ""
-  "content/Resultados.tex" 1758350174.5327 156 7498ed87ddfe51051a5ab99af3832df8 ""
-  "main.aux" 1758358306.05336 2673 b2bae17db930bf879afa015f38a66bb6 "xelatex"
+  "content/Implementacion.tex" 1759314353.37675 7811 99d1bdafa7c19289dd5d9dc69ac7f235 ""
+  "content/Marco_teorico.tex" 1758358377.08536 9221 22c9c2a15c29d31c8e395f8605ca14c1 ""
+  "content/Resultados.tex" 1759314375.80085 7732 705bb64a7ac3059bec60ebbe7f9855ec ""
+  "main.aux" 1759314515.82563 7286 78a8cbbb588067ef4197eba15c770dfd "xelatex"
   "main.bbl" 0 -1 0 "biber main"
-  "main.out" 1758358306.06136 2201 d7c7be2c5c9cb0dd277ad795d09931ba "xelatex"
-  "main.run.xml" 1758358306.06536 2438 474b458ee8f9df91178ef881f263e94e "xelatex"
-  "main.tex" 1758357792.58541 562 6f308b5d1f3df016588239335eaaa51e ""
-  "main.toc" 1758358306.06536 1568 e1d779d0628cba9e37cb6802fa803954 "xelatex"
+  "main.out" 1759314515.83386 3303 23ee1cc5d4f1178e217aab05c93f913b "xelatex"
+  "main.run.xml" 1759314515.83798 2438 474b458ee8f9df91178ef881f263e94e "xelatex"
+  "main.tex" 1759314512.64684 562 6f308b5d1f3df016588239335eaaa51e ""
+  "main.toc" 1759314515.83798 2108 829cb4124d937122b48f324cbdbd5a3d "xelatex"
   (generated)
   "main.aux"
   "main.auxlock"

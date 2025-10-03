@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.6.14)  20 SEP 2025 03:51
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.6.14)  1 OCT 2025 05:28
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1655,7 +1655,43 @@ LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/b/n' will be
 (Font)              scaled to size 7.8691pt on input line 10.
 LaTeX Font Info:    Font shape `TU/MononokiNerdFont(0)/m/it' will be
 (Font)              scaled to size 8.18385pt on input line 25.
-) (./content/Resultados.tex) [3] [4] 
+ [3] [4]) (./content/Resultados.tex [5]
+File: ../images/caminata_simple_lineal.png Graphic file (type bmp)
+<../images/caminata_simple_lineal.png>
+File: ../images/caminata_simple_loglog.png Graphic file (type bmp)
+<../images/caminata_simple_loglog.png>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6]
+File: ../images/caminata_doble_p_0.3.png Graphic file (type bmp)
+<../images/caminata_doble_p_0.3.png>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: ../images/caminata_doble_p_0.5.png Graphic file (type bmp)
+<../images/caminata_doble_p_0.5.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: ../images/caminata_doble_p_0.7.png Graphic file (type bmp)
+<../images/caminata_doble_p_0.7.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: ../images/caminata_doble_ratios.png Graphic file (type bmp)
+<../images/caminata_doble_ratios.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: ../images/matriz_perturbada_analisis.png Graphic file (type bmp)
+<../images/matriz_perturbada_analisis.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7] [8]) [9] [10] [11] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./main.aux
 LaTeX Info: Redefining \sptext on input line 12.
@@ -1667,18 +1703,18 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D7C7BE2C5C9CB0DD277AD795D09931BA;2201.
+(rerunfilecheck)             Checksum: 23EE1CC5D4F1178E217AAB05C93F913B;3303.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60506 strings out of 474878
- 1444498 string characters out of 5762516
- 2655660 words of memory out of 5000000
- 81601 multiletter control sequences out of 15000+600000
+ 60605 strings out of 474878
+ 1447632 string characters out of 5762516
+ 2882046 words of memory out of 5000000
+ 81693 multiletter control sequences out of 15000+600000
  570758 words of font info for 112 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,20n,125p,1674b,4199s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (4 pages, 128712 bytes).
+Output written on main.xdv (11 pages, 321096 bytes).

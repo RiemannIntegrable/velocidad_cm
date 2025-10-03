@@ -1,0 +1,122 @@
+\section{Casos de Prueba}
+
+\subsection{Caminata Aleatoria Simple}
+
+La caminata aleatoria simple es un proceso en una estructura cíclica de n estados, donde las probabilidades de transición están definidas por p (probabilidad de avanzar al siguiente estado) y q = 1-p (probabilidad de retroceder al estado anterior). La matriz de transición P tiene la forma donde cada estado i puede transitar al estado (i+1) mod n con probabilidad p, o al estado (i-1) mod n con probabilidad q.
+
+La implementación se realiza mediante la función \texttt{generar\_caminata\_aleatoria(n, p)}:
+
+\begin{lstlisting}[language=Python]
+def generar_caminata_aleatoria(n, p):
+    """
+    Genera matriz de transición para caminata aleatoria cíclica.
+
+    Args:
+        n: Número de estados
+        p: Probabilidad de ir al siguiente estado (q = 1-p al anterior)
+
+    Returns:
+        P: Matriz de transición
+    """
+    q = 1 - p
+    P = np.zeros((n, n))
+
+    for i in range(n):
+        P[i, (i + 1) % n] = p  # Probabilidad de ir al siguiente (mod n para ciclo)
+        P[i, (i - 1) % n] = q  # Probabilidad de ir al anterior (mod n para ciclo)
+
+    return P
+\end{lstlisting}
+
+Se probó con tamaños desde n = 10 hasta n = 560 con incrementos de 50, y cuatro valores de probabilidad p = [0.2, 0.4, 0.6, 0.8]. Para cada combinación se generó la matriz de transición correspondiente y se aplicaron ambos métodos, midiendo los tiempos de ejecución mediante \texttt{perf\_counter()} y calculando el error de convergencia entre los resultados.
+
+\subsection{Caminata Aleatoria Doble (Forma de "8")}
+
+La caminata aleatoria doble implementa una estructura topológica en forma de "8", donde el espacio de estados se divide en dos mitades conectadas que forman ciclos independientes con puntos de intercomunicación. El número total de estados n debe ser par para permitir la división equitativa en dos componentes de n/2 estados cada una.
+
+La función \texttt{generar\_caminata\_doble(n, p, r)} recibe tres parámetros: n determina el tamaño total del espacio de estados, p establece la probabilidad de transición al siguiente estado dentro de la misma mitad, y r define la probabilidad de salto entre las dos mitades del sistema. Cada mitad opera como un ciclo cerrado donde los estados intermedios tienen probabilidad p de avanzar al siguiente estado y probabilidad 1-p de retroceder al anterior.
+
+\begin{lstlisting}[language=Python]
+def generar_caminata_doble(n, p, r):
+    """
+    Genera matriz de transición para caminata aleatoria en forma de "8".
+
+    Args:
+        n: Número total de estados (debe ser par)
+        p: Probabilidad de ir al siguiente estado dentro de la misma mitad
+        r: Probabilidad de ir de una mitad a la otra
+
+    Returns:
+        P: Matriz de transición
+    """
+    if n % 2 != 0:
+        raise ValueError("n debe ser par para dividir en dos mitades")
+
+    P = np.zeros((n, n))
+    mitad = n // 2
+
+    # Primera mitad: estados 0 a mitad-1
+    for i in range(mitad):
+        if i < mitad - 1:
+            # Estados intermedios de la primera mitad
+            P[i, i + 1] = p  # Siguiente en la misma mitad
+            P[i, i - 1 if i > 0 else mitad - 1] = 1 - p  # Anterior (cíclico)
+        else:
+            # Último estado de la primera mitad (i = mitad-1)
+            P[i, 0] = p  # Va al primero de la misma mitad
+            P[i, i - 1] = 1 - p - r  # Anterior en la misma mitad
+            P[i, mitad] = r  # Conexión a la segunda mitad
+
+    # Segunda mitad: estados mitad a n-1
+    for i in range(mitad, n):
+        if i < n - 1:
+            # Estados intermedios de la segunda mitad
+            P[i, i + 1] = p  # Siguiente en la misma mitad
+            P[i, i - 1 if i > mitad else n - 1] = 1 - p  # Anterior (cíclico)
+        else:
+            # Último estado de la segunda mitad (i = n-1)
+            P[i, mitad] = p  # Va al primero de la segunda mitad
+            P[i, i - 1] = 1 - p - r  # Anterior en la misma mitad
+            P[i, mitad - 1] = r  # Conexión a la primera mitad
+
+    return P
+\end{lstlisting}
+
+Se probó con tamaños de n desde 10 hasta 500 con incrementos de 50, asegurando que todos los valores sean pares. Los parámetros de probabilidad incluyen $p \in \{0.3, 0.5, 0.7\}$ para las transiciones internas y $r \in \{0.05, 0.1, 0.2\}$ para los saltos entre mitades.
+
+\subsection{Matriz Perturbada (Casi-Identidad)}
+
+La matriz perturbada representa un caso donde la cadena de Markov permanece predominantemente en el mismo estado, implementando una perturbación minimal de la matriz identidad. Esta configuración genera matrices con número de condición elevado, lo que permite evaluar la estabilidad numérica de los algoritmos en condiciones adversas.
+
+La implementación utiliza una perturbación $\varepsilon = 1 \times 10^{-8}$: la diagonal principal se reduce mediante la substracción de $\varepsilon$, mientras que las diagonales superior e inferior reciben una adición de $\varepsilon/2$. Posteriormente se realiza una normalización por filas para garantizar que cada fila sume exactamente uno.
+
+\begin{lstlisting}[language=Python]
+def generar_matriz_perturbada(n):
+    """
+    Genera matriz de transición basada en identidad con perturbación.
+
+    Args:
+        n: Número de estados
+
+    Returns:
+        P: Matriz de transición estocástica
+    """
+    epsilon = 1e-8
+    P = np.eye(n)
+
+    # Restar epsilon de la diagonal principal
+    P -= epsilon * np.eye(n)
+
+    # Añadir epsilon/2 a las diagonales superior e inferior
+    for i in range(n - 1):
+        P[i, i + 1] += epsilon / 2  # Diagonal superior
+        P[i + 1, i] += epsilon / 2  # Diagonal inferior
+
+    # Normalizar filas para asegurar que sumen 1
+    row_sums = P.sum(axis=1)
+    P = P / row_sums[:, np.newaxis]
+
+    return P
+\end{lstlisting}
+
+Se probó con tamaños desde n = 10 hasta n = 400 con incrementos de 40, empleando un rango menor que las otras configuraciones debido a la naturaleza computacionalmente sensible de estas matrices mal condicionadas. Se calculó el número de condición de cada matriz generada para monitorear el grado de condicionamiento y su impacto en la precisión de los resultados.

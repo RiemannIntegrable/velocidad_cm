@@ -1,0 +1,35 @@
+\section{Marco Teórico}
+
+\subsection{Cadenas de Markov y Distribución Estacionaria}
+
+Una cadena de Markov es un proceso estocástico $\{X_n\}_{n \geq 0}$ con espacio de estados finito $S = \{0, 1, \ldots, n-1\}$ que satisface la propiedad de Markov: $P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = P(X_{n+1} = j | X_n = i)$. La matriz de transición $P \in \mathbb{R}^{n \times n}$ está definida por $P_{ij} = P(X_{n+1} = j | X_n = i)$, donde cada elemento es no negativo y cada fila suma uno.
+
+La distribución estacionaria es un vector $\pi \in \mathbb{R}^n$ que satisface $\pi = \pi P$ junto con las condiciones $\sum_{i=0}^{n-1} \pi_i = 1$ y $\pi_i \geq 0$. Para matrices irreducibles y aperiódicas, existe una única distribución estacionaria tal que $\lim_{n \to \infty} P^n = \mathbf{1}\pi^T$.
+
+\subsection{Método del Autovector}
+
+Este método se basa en que la distribución estacionaria $\pi$ es el autovector izquierdo de $P$ asociado al autovalor $\lambda = 1$: $\pi P = \pi \Leftrightarrow \pi^T P^T = \pi^T$. El Teorema de Perron-Frobenius garantiza que para una matriz estocástica irreducible, el autovalor $\lambda = 1$ es único y dominante, y existe un único autovector positivo normalizado.
+
+El algoritmo utiliza la descomposición espectral mediante \texttt{np.linalg.eig(P.T)}, que calcula todos los autovalores y autovectores a través de tres etapas: reducción a forma de Hessenberg usando transformaciones de Householder, aplicación del algoritmo QR con desplazamientos para encontrar los autovalores, y cálculo de autovectores por sustitución hacia atrás.
+
+La complejidad temporal es $\mathcal{O}(n^3)$, donde las tres etapas principales contribuyen aproximadamente con $10n^3$ operaciones de punto flotante en total. La complejidad espacial es $\mathcal{O}(n^2)$ debido al almacenamiento de la matriz completa y los autovectores.
+
+\subsection{Método de Tiempos Medios de Primer Retorno}
+
+El tiempo medio de primer retorno al estado $j$ se define como $E[T_j] = E[\min\{n \geq 1 : X_n = j | X_0 = j\}]$. Para una cadena de Markov irreducible con distribución estacionaria $\pi$, se cumple $\pi_j = \frac{1}{E[T_j]}$.
+
+Para calcular $E[T_j]$, sea $m_j^{(i)}$ el tiempo esperado de primer retorno al estado $j$ comenzando desde el estado $i \neq j$. Entonces $m_j^{(i)} = 1 + \sum_{k \neq j} P_{ik} m_j^{(k)}$, lo que genera un sistema lineal de dimensión $(n-1) \times (n-1)$: $(I - P_{-j}) \mathbf{m}_j = \mathbf{1}$, donde $P_{-j}$ es la matriz $P$ sin la fila y columna $j$. El tiempo medio de retorno desde $j$ es $E[T_j] = 1 + \sum_{k \neq j} P_{jk} m_j^{(k)}$.
+
+El algoritmo procede iterativamente para cada estado $j = 0, 1, \ldots, n-1$: construye $P_{-j}$, resuelve el sistema lineal $(I - P_{-j}) \mathbf{m}_j = \mathbf{1}$ mediante factorización LU, calcula $E[T_j] = 1 + \mathbf{p}_{j,-j}^T \mathbf{m}_j$, y obtiene $\pi_j = 1/E[T_j]$.
+
+La construcción de cada $P_{-j}$ requiere $\mathcal{O}(n^2)$ operaciones. La resolución del sistema lineal mediante factorización LU tiene costo $\mathcal{O}(n^3)$ por cada estado. Como este proceso se repite para $n$ estados, la complejidad total es $\mathcal{O}(n^4)$, con aproximadamente $\frac{2n^4}{3}$ operaciones de punto flotante.
+
+\subsection{Comparación de Complejidad Computacional}
+
+El método del autovector presenta complejidad $\mathcal{O}(n^3)$ y el método de tiempos $\mathcal{O}(n^4)$, ambos con complejidad espacial $\mathcal{O}(n^2)$. La razón de tiempos de ejecución entre ambos métodos puede aproximarse como $\frac{\text{Tiempo}(\text{Tiempos})}{\text{Tiempo}(\text{Autovector})} \approx 0.067n$, indicando que para $n = 100$ el método de tiempos es aproximadamente $6.7$ veces más lento, para $n = 500$ es $33.5$ veces más lento, y para $n = 1000$ alcanza $67$ veces más lento.
+
+Las bibliotecas BLAS/LAPACK proporcionan optimizaciones significativas como manejo eficiente de caché, vectorización, y paralelización automática. Varios factores afectan las mediciones: para tamaños pequeños ($n < 100$) los términos de orden inferior dominan, la jerarquía de memoria favorece matrices que caben en caché, y BLAS puede utilizar múltiples threads automáticamente.
+
+El número de condición $\kappa(P) = \frac{\sigma_{\max}}{\sigma_{\min}}$ determina la estabilidad numérica: cuando $\kappa(P) < 10^{12}$ es posible alcanzar precisión de máquina, mientras que $\kappa(P) > 10^{12}$ resulta en pérdida de precisión. El método del autovector es generalmente más robusto ante perturbaciones que el método de tiempos medios.
+
+Para la selección algorítmica, matrices pequeñas ($n \leq 100$) se benefician de la descomposición espectral directa. Para matrices medianas ($100 < n \leq 1000$) se recomienda el método del autovector cuando se requiere precisión. En matrices grandes ($n > 1000$) conviene considerar métodos iterativos especializados que exploten estructura dispersa cuando sea aplicable.
